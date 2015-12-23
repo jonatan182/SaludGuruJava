@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <title>TODO supply a title</title>
+        <link type="text/css" rel="stylesheet" href="../estilo.css"/><!--Retrocedemos una carpeta para el archivo css-->
+    </head>
+    <body>
+        <h:form>
+            <h:dataTable class="tabla" value="#{cita.citaModelo}" var="a" border="1">
+                <h:column>
+                    <f:facet name="header">IdCita</f:facet>
+                    #{a.idCita}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Paciente</f:facet>
+                    #{a.idPaciente.nombrePaciente}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Doctor</f:facet>
+                    #{a.idMedico.nombreMedico}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Fecha</f:facet>
+                    #{a.horaCita}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Opcion</f:facet>
+                    <h:commandLink class="link" value="Eliminar " action="citav" actionListener="#{cita.eliminar}">
+                        <f:attribute name="mid" value="#{a.idCita}"/>
+                    </h:commandLink>
+                    <h:commandLink class="link" value="Actualizar" action="nuevacita" actionListener="#{cita.buscar}">
+                        <f:attribute name="mid" value="#{a.idCita}"/>
+                    </h:commandLink>
+                </h:column>
+
+            </h:dataTable> 
+            <br/>
+            <h:outputLabel value="#{cita.msg}"/>
+            <br/>
+             <h:commandLink class="link" action="nuevacita" value="Nueva Cita"/>
+             <br/>
+             <h:commandLink class="link" action="menu" value="Volver"/>
+        </h:form>
+            
+    </body>
+</html>

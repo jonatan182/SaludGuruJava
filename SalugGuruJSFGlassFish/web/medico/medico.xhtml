@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <title>TODO supply a title</title>
+        <link type="text/css" rel="stylesheet" href="../estilo.css"/><!--Retrocedemos una carpeta para el archivo css-->
+    </head>
+    <body>
+        <h:form>
+            <h:dataTable class="tabla" value="#{medico.medicoModelo}" var="a" border="1">
+                <h:column>
+                    <f:facet name="header">IdMedico</f:facet>
+                        #{a.idMedico}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Nombre</f:facet>
+                        #{a.nombreMedico}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Opcion</f:facet>
+                    <h:commandLink class="link" value="Eliminar " action="medicov" actionListener="#{medico.eliminar}">
+                        <f:attribute name="mid" value="#{a.idMedico}"/>
+                    </h:commandLink>
+                    <h:commandLink class="link" value="Actualizar" action="nuevoMedico" actionListener="#{medico.buscar}"><!--para llenar las cajas de texto -->
+                        <f:attribute name="mid" value="#{a.idMedico}"/>
+                    </h:commandLink>
+                </h:column>
+            </h:dataTable>
+            <h:outputLabel value="#{medico.msg}"></h:outputLabel>
+            <br/>
+            <h:commandLink class="link" value="Ingresar" action="nuevoMedico"/>
+            <br/>
+            <h:commandLink class="link" value="Consulta" action="consultaMedico"/>
+             <br/>
+             <h:commandLink class="link" action="menu" value="Volver"/>
+        </h:form>
+    </body>
+</html>

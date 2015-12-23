@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <title>TODO supply a title</title>
+        <link type="text/css" rel="stylesheet" href="../estilo.css"/><!--Retrocedemos una carpeta para el archivo css-->
+    </head>
+    <body>
+        <h:form>
+            <h3>Medico:<h:selectOneMenu value="#{cita.idMedico}" onchange="submit()">
+                            <f:selectItems value="#{medico.itemsM}"></f:selectItems>
+                       </h:selectOneMenu>
+            </h3>
+            <h3>Fecha:<h:inputText value="#{cita.horaCita}"/>yyyy-mm-dd</h3>
+            <h:dataTable class="tabla" value="#{cita.medicoModeloConsulta}" var="a" border="1">
+                <h:column>
+                    <f:facet name="header">IdCita</f:facet>
+                    #{a.idCita}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Fecha</f:facet>
+                    #{a.horaCita}
+                </h:column>
+               <h:column>
+                    <f:facet name="header">Paciente</f:facet>
+                    #{a.idPaciente.nombrePaciente}
+                </h:column>
+            </h:dataTable>
+            <h:commandLink class="link" action="medicov" value="Volver"/>
+        </h:form>
+    </body>
+</html>

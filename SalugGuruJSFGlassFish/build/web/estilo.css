@@ -1,0 +1,20 @@
+.boton{
+    border-radius:20px 20px 20px 20px; 
+    box-shadow:5px 0px 10px #939393;
+}
+.link
+{
+    text-decoration: none;
+    color:#045491;
+    font-weight: bold;
+}
+.link:hover{
+    text-decoration: underline;
+}
+.tabla{
+    background-color:#dddddd;
+}
+root { 
+    display: block;
+}
+

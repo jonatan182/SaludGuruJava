@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>TODO supply a title</title>
+        <link type="text/css" rel="stylesheet" href="../estilo.css"/><!--Retrocedemos una carpeta para el archivo css-->
+        <h:outputScript>
+
+            function rel(){
+                var fecha = new Date();
+                var hora = fecha.getHours();
+                var minutos = fecha.getMinutes();
+                var segundos = fecha.getSeconds();
+                var recargar = setTimeout("rel()",500);
+                var valor=0;
+                document.getElementById("reloj").innerHTML=hora+":"+minutos+":"+segundos;
+                var valorH = parseInt(hora);
+                
+                if(valorH &lt; 15){//indicamos menor que  no se puede con el signo por que sale error
+                    valor = (valorH*2000);
+                    document.getElementById('form1:tarifa').value=valor;//para indicar valor a un H:inputText toca indicar el id del formulario y el id de la caja de texto para que funcione
+                }
+            }
+        </h:outputScript>
+    </h:head>
+    <h:body onload="rel()">
+        <h:form id="form1">
+            <h2>Nueva Cita</h2>
+            <center>
+                <p id="reloj"/> 
+                <table>
+                    <tr><td>Tarifa:</td><td><h:inputText id="tarifa" value="#{cita.valorCita}" disabled="true"/></td></tr>
+                    <tr><td>ID:</td><td><h:inputText value="#{cita.idCita}"/></td></tr>
+                    <tr>
+                        <td>
+                            Medico:
+                        </td>
+                        <td>
+                            <h:selectOneMenu value="#{cita.idMedico}"><!--el valor del value idMedico es el valor que vamos a tener seleccionado al inicio"idmedico" en el combobox, por eso es que cuando actualizamos, tambien indicamods el idmedico para que se muestre en el formulario"-->
+                                <f:selectItems value="#{medico.itemsM}"></f:selectItems><!--cargamos todos los items, pero tenemos seleccionado el que se escojio arriba idMedico-->
+                            </h:selectOneMenu>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            Paciente:
+                        </td>
+                        <td>
+                            <h:selectOneMenu value="#{cita.idPaciente}">
+                                <f:selectItems value="#{cita.itemsP}"></f:selectItems>
+                            </h:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Fecha:
+                        </td>
+                        <td>
+                            <h:inputText value="#{cita.horaCita}"/>
+                        </td>
+                    </tr>
+                </table>
+                 <h:commandButton class="boton" action="citav" actionListener="#{cita.guardar}" value="Guardar">
+                 </h:commandButton>
+            </center>
+            <br/>
+            <h:commandLink class="link" action="citav" value="Volver"/>
+            <h:inputHidden value="#{cita.estado}"/>
+        </h:form>
+    </h:body>
+</html>
